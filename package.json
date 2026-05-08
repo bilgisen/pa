@@ -25,7 +25,6 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
-    "@paraanaliz/shared-types": "workspace:*",
     "@opennextjs/cloudflare": "^1.11.0",
     "@payloadcms/db-d1-sqlite": "3.82.1",
     "@payloadcms/next": "3.82.1",

@@ -1,5 +1,5 @@
 import type { CollectionBeforeValidateHook } from 'payload'
-import { toSlug } from '@paraanaliz/shared-types'
+import { toSlug } from '../utils/slug'
 
 /**
  * generateSlug: title alanından otomatik slug üretir.
