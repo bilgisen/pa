@@ -38,7 +38,7 @@ export const News: CollectionConfig = {
       },
     },
     {
-      name: 'content',
+      name: 'body',
       type: 'richText',
       required: true,
       label: 'İçerik',
@@ -96,7 +96,7 @@ export const News: CollectionConfig = {
       index: true,
       label: 'Eski URL (WordPress)',
       admin: {
-        description: "WordPress'ten migrate edilen içerikler için eski URL (örn. /2021/haber/slug/)",
+        hidden: true,
       },
     },
     {

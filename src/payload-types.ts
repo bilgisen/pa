@@ -218,7 +218,18 @@ export interface Author {
    * URL-safe benzersiz tanımlayıcı (örn. evren-bolgun)
    */
   slug: string;
+  email?: string | null;
+  /**
+   * https:// ile başlayan URL
+   */
+  website?: string | null;
+  /**
+   * Yazar listesinde gösterilecek kısa tanıtım (1-2 cümle)
+   */
   shortBio?: string | null;
+  /**
+   * Yazar profil sayfasında gösterilecek detaylı biyografi
+   */
   longBio?: {
     root: {
       type: string;
@@ -236,10 +247,26 @@ export interface Author {
   } | null;
   profilePhoto?: (number | null) | Media;
   socialLinks?: {
+    /**
+     * @kullaniciadi veya tam URL
+     */
     twitter?: string | null;
+    /**
+     * @kullaniciadi veya tam URL
+     */
     instagram?: string | null;
+    /**
+     * Profil URL'si
+     */
     linkedin?: string | null;
+    /**
+     * Profil veya sayfa URL'si
+     */
     facebook?: string | null;
+    /**
+     * Kanal URL'si
+     */
+    youtube?: string | null;
   };
   /**
    * Frontend'de yazar listesi sıralaması için (küçük sayı önce gelir)
@@ -259,7 +286,7 @@ export interface News {
    * Boş bırakılırsa başlıktan otomatik üretilir
    */
   slug: string;
-  content: {
+  body: {
     root: {
       type: string;
       children: {
@@ -283,9 +310,6 @@ export interface News {
   publishedAt?: string | null;
   featuredImage?: (number | null) | Media;
   status: 'draft' | 'published';
-  /**
-   * WordPress'ten migrate edilen içerikler için eski URL (örn. /2021/haber/slug/)
-   */
   legacyUrl?: string | null;
   seo?: {
     metaTitle?: string | null;
@@ -312,7 +336,7 @@ export interface Blog {
    * Boş bırakılırsa başlıktan otomatik üretilir
    */
   slug: string;
-  content: {
+  body: {
     root: {
       type: string;
       children: {
@@ -336,9 +360,6 @@ export interface Blog {
   publishedAt?: string | null;
   featuredImage?: (number | null) | Media;
   status: 'draft' | 'published';
-  /**
-   * WordPress'ten migrate edilen içerikler için eski URL (örn. /2021/yazarlar/yazar-slug/post-slug/)
-   */
   legacyUrl?: string | null;
   seo?: {
     metaTitle?: string | null;
@@ -517,6 +538,8 @@ export interface TagsSelect<T extends boolean = true> {
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  email?: T;
+  website?: T;
   shortBio?: T;
   longBio?: T;
   profilePhoto?: T;
@@ -527,6 +550,7 @@ export interface AuthorsSelect<T extends boolean = true> {
         instagram?: T;
         linkedin?: T;
         facebook?: T;
+        youtube?: T;
       };
   displayOrder?: T;
   updatedAt?: T;
@@ -539,7 +563,7 @@ export interface AuthorsSelect<T extends boolean = true> {
 export interface NewsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  content?: T;
+  body?: T;
   category?: T;
   tags?: T;
   author?: T;
@@ -564,7 +588,7 @@ export interface NewsSelect<T extends boolean = true> {
 export interface BlogSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  content?: T;
+  body?: T;
   category?: T;
   tags?: T;
   author?: T;

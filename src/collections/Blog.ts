@@ -38,7 +38,7 @@ export const Blog: CollectionConfig = {
       },
     },
     {
-      name: 'content',
+      name: 'body',
       type: 'richText',
       required: true,
       label: 'İçerik',
@@ -96,8 +96,7 @@ export const Blog: CollectionConfig = {
       index: true,
       label: 'Eski URL (WordPress)',
       admin: {
-        description:
-          "WordPress'ten migrate edilen içerikler için eski URL (örn. /2021/yazarlar/yazar-slug/post-slug/)",
+        hidden: true,
       },
     },
     {
