@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isAdminOrEditor, isOwnAuthorProfile, adminOnly } from '../access/roles'
+import { isAdminOrEditor, adminOnly } from '../access/roles'
 import { preventAuthorDelete } from '../hooks/preventDeleteIfHasContent'
 
 export const Authors: CollectionConfig = {
@@ -9,7 +9,8 @@ export const Authors: CollectionConfig = {
     defaultColumns: ['name', 'slug', 'displayOrder', 'updatedAt'],
   },
   access: {
-    read: isOwnAuthorProfile,
+    // Admin panelde her zaman görünür; public API'de tüm yazarlar okunabilir
+    read: () => true,
     create: isAdminOrEditor,
     update: isAdminOrEditor,
     delete: adminOnly,
@@ -36,14 +37,33 @@ export const Authors: CollectionConfig = {
       },
     },
     {
+      name: 'email',
+      type: 'email',
+      label: 'E-posta',
+    },
+    {
+      name: 'website',
+      type: 'text',
+      label: 'Web Sitesi',
+      admin: {
+        description: 'https:// ile başlayan URL',
+      },
+    },
+    {
       name: 'shortBio',
       type: 'textarea',
       label: 'Kısa Biyografi',
+      admin: {
+        description: 'Yazar listesinde gösterilecek kısa tanıtım (1-2 cümle)',
+      },
     },
     {
       name: 'longBio',
       type: 'richText',
       label: 'Uzun Biyografi',
+      admin: {
+        description: 'Yazar profil sayfasında gösterilecek detaylı biyografi',
+      },
     },
     {
       name: 'profilePhoto',
@@ -54,12 +74,38 @@ export const Authors: CollectionConfig = {
     {
       name: 'socialLinks',
       type: 'group',
-      label: 'Sosyal Medya Linkleri',
+      label: 'Sosyal Medya',
       fields: [
-        { name: 'twitter', type: 'text', label: 'Twitter/X' },
-        { name: 'instagram', type: 'text', label: 'Instagram' },
-        { name: 'linkedin', type: 'text', label: 'LinkedIn' },
-        { name: 'facebook', type: 'text', label: 'Facebook' },
+        {
+          name: 'twitter',
+          type: 'text',
+          label: 'Twitter/X',
+          admin: { description: '@kullaniciadi veya tam URL' },
+        },
+        {
+          name: 'instagram',
+          type: 'text',
+          label: 'Instagram',
+          admin: { description: '@kullaniciadi veya tam URL' },
+        },
+        {
+          name: 'linkedin',
+          type: 'text',
+          label: 'LinkedIn',
+          admin: { description: 'Profil URL\'si' },
+        },
+        {
+          name: 'facebook',
+          type: 'text',
+          label: 'Facebook',
+          admin: { description: 'Profil veya sayfa URL\'si' },
+        },
+        {
+          name: 'youtube',
+          type: 'text',
+          label: 'YouTube',
+          admin: { description: 'Kanal URL\'si' },
+        },
       ],
     },
     {
